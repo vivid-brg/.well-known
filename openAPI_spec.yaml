@@ -1,0 +1,44 @@
+openapi: 3.1.0
+info:
+  title: n8n ChatGPT-Enterprise Webhook
+  version: "1.0.0"
+  description: Trigger the “super-ai-agent” n8n workflow.
+servers:
+  - url: https://brg-ai.app.n8n.cloud
+paths:
+  /webhook/super-ai-agent:
+    post:
+      operationId: triggerWorkflow
+      summary: Invoke the n8n workflow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: string
+                  description: The user’s message
+                imageUrl:
+                  type: string
+                  description: Optional image URL
+                audioUrl:
+                  type: string
+                  description: Optional audio URL
+              required:
+                - input
+      responses:
+        '200':
+          description: Workflow response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reply:
+                    type: string
+                  audioUrl:
+                    type: string
+                  imageAnalysis:
+                    type: object
